@@ -20,6 +20,7 @@ The course covers the basics of Deep Learning, with a focus on applications.
   - [Embeddings and Recommender Systems](https://m2dsupsdlclass.github.io/lectures-labs/slides/03_recommender_systems/index.html)
   - [Convolutional Neural Networks for Image Classification](https://m2dsupsdlclass.github.io/lectures-labs/slides/04_conv_nets/index.html)
   - [Deep Learning for Object Detection and Image Segmentation](https://m2dsupsdlclass.github.io/lectures-labs/slides/05_conv_nets_2/index.html)
+  - [Recurrent Neural Networks and NLP](https://m2dsupsdlclass.github.io/lectures-labs/slides/06_deep_nlp/index.html)
 
 Note: press "P" to display the presenter's notes that include some comments and
 additional references.
@@ -66,6 +67,11 @@ Direct links to the rendered notebooks including solutions (to be updated in ren
   - [Fully Convolutional Neural Networks](https://github.com/rth/dl-lectures-labs/blob/master/labs/05_conv_nets_2/Fully_Convolutional_Neural_Networks_rendered.ipynb)
   - [ConvNets for Classification and Localization](https://github.com/rth/dl-lectures-labs/blob/master/labs/05_conv_nets_2/ConvNets_for_Classification_and_Localization_rendered.ipynb)
 
+#### Lab 6: Text Classification, Word Embeddings and Language Models
+
+  - [Text Classification and Word Vectors](https://github.com/m2dsupsdlclass/lectures-labs/blob/master/labs/06_deep_nlp/NLP_word_vectors_classification_rendered.ipynb)
+  - [Character Level Language Model (GPU required)](https://github.com/m2dsupsdlclass/lectures-labs/blob/master/labs/06_deep_nlp/Character_Level_Language_Model_rendered.ipynb)
+  - [Transformers (BERT fine-tuning): Joint Intent Classification and Slot Filling](https://github.com/m2dsupsdlclass/lectures-labs/blob/master/labs/06_deep_nlp/Transformers_Joint_Intent_Classification_Slot_Filling_rendered.ipynb)
   
 ## Acknowledgments
 
