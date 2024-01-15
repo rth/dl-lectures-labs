@@ -11,23 +11,27 @@ because conda-forge tends to be more up-to-date and support more platforms than
 the default channel of Anaconda/miniconda. However both might work for this
 class.
 
-Optional: feel free to create a dedicated conda environment for this class
+Optional: make sure you have the latest version of conda which comes with faster solvers,
+
+    conda update -n base conda
+
+Recommended: it's strongly recommended to create a dedicated conda environment for this class
 if you don't want to mess with Python dependencies needed for other classes or projects:
 
-    conda create -n dlclass python=3.9
+    conda create -n dlclass -c conda-forge python=3.9
     conda activate dlclass
 
 Install or update the following packages with the conda command:
 
-    conda install -y tensorflow scikit-learn pandas jupyterlab matplotlib-base
-    conda install -y h5py pillow scikit-image lxml pip ipykernel
+    conda install -c conda-forge -y tensorflow scikit-learn pandas jupyterlab matplotlib-base
+    conda install -c conda-forge -y h5py pillow scikit-image lxml pip ipykernel
 
 Check that you can import tensorflow with the python from anaconda:
 
     python -c "import tensorflow as tf; print(tf.__version__)"
-    2.6.0
+    2.11.0
 
-Note that any tensorflow version from 2.0.0 should work for this class.
+Note that any tensorflow version from 2.0.0, <3.0.0 should work for this class.
 
 If you have several installations of Python on your system (virtualenv, conda
 environments...), it can be confusing to select the correct Python environment
