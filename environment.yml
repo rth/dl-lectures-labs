@@ -1,0 +1,19 @@
+name: dlclass
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - tensorflow
+  - scikit-learn
+  - pandas
+  - jupyterlab
+  - matplotlib-base
+  - h5py
+  - pillow
+  - scikit-image
+  - lxml
+  - pip
+  - ipykernel
+  pip:
+    - opencv-python
+  
