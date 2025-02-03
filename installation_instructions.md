@@ -21,10 +21,9 @@ if you don't want to mess with Python dependencies needed for other classes or p
     conda create -n dlclass -c conda-forge python=3.9
     conda activate dlclass
 
-Install or update the following packages with the conda command:
+You can install the requireds packages with conda:
 
-    conda install -c conda-forge -y tensorflow scikit-learn pandas jupyterlab matplotlib-base
-    conda install -c conda-forge -y h5py pillow scikit-image lxml pip ipykernel
+    conda install -c conda-forge -y tensorflow scikit-learn pandas jupyterlab matplotlib-base h5py pillow scikit-image lxml pip ipykernel
 
 Check that you can import tensorflow with the python from anaconda:
 
