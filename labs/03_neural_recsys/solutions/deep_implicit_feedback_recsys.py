@@ -1,7 +1,10 @@
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Embedding, Flatten, Dense
-from tensorflow.keras.layers import Concatenate, Dropout
-from tensorflow.keras.regularizers import l2
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
+from keras.models import Model
+from keras.layers import Embedding, Flatten, Dense
+from keras.layers import Concatenate, Dropout
+from keras.regularizers import l2
 
 
 class MLP(layers.Layer):

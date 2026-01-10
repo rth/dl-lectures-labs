@@ -1,4 +1,7 @@
-from tensorflow.keras.models import Sequential
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
+from keras.models import Sequential
 
 model3 = Sequential([
     embedding_layer,
