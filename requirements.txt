@@ -1,14 +1,20 @@
+# Core dependencies
 numpy
 scipy
 scikit-learn
 jupyter
 matplotlib
 pandas
-h5py==2.10.0  # problem when loading pre-trained keras models with newer versions
 pillow
 scikit-image
 lxml
-tensorflow>=2.5.1
 opencv-python
-gast
 setuptools>=41.0.0
+
+# Keras 3 with PyTorch backend
+keras>=3.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+
+# h5py - no longer pinned (Keras 3 prefers .keras format)
+h5py>=3.0.0
