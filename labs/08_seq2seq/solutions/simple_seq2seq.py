@@ -1,5 +1,5 @@
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, Dropout, GRU, Dense
+from keras.models import Sequential
+from keras.layers import Embedding, Dropout, GRU, Dense
 
 vocab_size = len(shared_vocab)
 simple_seq2seq = Sequential()
