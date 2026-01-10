@@ -1,12 +1,14 @@
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 import matplotlib.pyplot as plt
 
 from pathlib import Path
 from zipfile import ZipFile
 from urllib.request import urlretrieve
 
-from keras.layers import Input, Embedding, Flatten, merge, Dense, Dropout, Lambda
+from keras.layers import Input, Embedding, Flatten, Dense, Dropout, Concatenate
 from keras.models import Model
-import keras.backend as K
 import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
@@ -24,7 +26,8 @@ if not ML_1M_FOLDER.exists():
 
 
 all_ratings = pd.read_csv(ML_1M_FOLDER / 'ratings.dat', sep='::',
-                          names=["user_id", "item_id", "rating", "timestamp"])
+                          names=["user_id", "item_id", "rating", "timestamp"],
+                          engine='python')
 all_ratings.head()
 
 max_user_id = all_ratings['user_id'].max()
@@ -58,21 +61,21 @@ item_embedding = Embedding(output_dim=embedding_size, input_dim=max_item_id + 1,
 user_vecs = Flatten()(user_embedding)
 item_vecs = Flatten()(item_embedding)
 
-input_vecs = merge([user_vecs, item_vecs], mode='concat')
+input_vecs = Concatenate()([user_vecs, item_vecs])
 input_vecs = Dropout(0.5)(input_vecs)
 
 dense_size = 64
 x = Dense(dense_size, activation='relu')(input_vecs)
-x = Dense(dense_size, activation='relu')(input_vecs)
-y = Dense(output_dim=1)(x)
+x = Dense(dense_size, activation='relu')(x)
+y = Dense(1)(x)
 
-model = Model(input=[user_id_input, item_id_input], output=y)
+model = Model(inputs=[user_id_input, item_id_input], outputs=y)
 model.compile(optimizer='adam', loss='mae')
 
 initial_train_preds = model.predict([user_id_train, item_id_train])
 
 history = model.fit([user_id_train, item_id_train], rating_train,
-                    batch_size=64, nb_epoch=15, validation_split=0.1,
+                    batch_size=64, epochs=15, validation_split=0.1,
                     shuffle=True)
 
 test_preds = model.predict([user_id_test, item_id_test])
