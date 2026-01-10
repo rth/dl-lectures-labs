@@ -1,12 +1,14 @@
 from __future__ import division
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 from keras.applications.resnet50 import ResNet50
 from keras.models import Model
 from keras.applications.imagenet_utils import preprocess_input
 import h5py
 import numpy as np
-from scipy.misc import imread, imresize
+from PIL import Image
 import xml.etree.ElementTree as etree
-import os
 import os.path as op
 
 images_folder = "VOCdevkit/VOC2007/JPEGImages"
@@ -59,9 +61,9 @@ def predict_batch(model, img_batch_path, img_size=None):
     img_list = []
 
     for im_path in img_batch_path:
-        img = imread(im_path)
+        img = np.array(Image.open(im_path))
         if img_size:
-            img = imresize(img,img_size)
+            img = np.array(Image.fromarray(img).resize(img_size))
 
         img = img.astype('float32')
         img_list.append(img)
@@ -82,7 +84,7 @@ input = model.layers[0].input
 
 # Remove the average pooling layer!
 output = model.layers[-2].output
-headless_conv = Model(input = input, output = output)
+headless_conv = Model(inputs=input, outputs=output)
 
 
 # Computing representations for all images
@@ -100,7 +102,7 @@ def compute_representations(annotations):
             img_names.append(img_path)
         batch = predict_batch(headless_conv, img_names, img_size=(224, 224))
         batches.append(batch)
-        print("batch %d/%d prepared" % (batch_idx + 1, n_batches)) 
+        print("batch %d/%d prepared" % (batch_idx + 1, n_batches))
     return np.vstack(batches)
 
 

@@ -1,4 +1,7 @@
-from keras.layers import Convolution2D
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
+from keras.layers import Conv2D
 from keras.models import Model
 
 input = base_model.layers[0].input
@@ -8,7 +11,7 @@ input = base_model.layers[0].input
 x = base_model.layers[-1].output
 
 # A 1x1 convolution, with 1000 output channels, one per class
-x = Convolution2D(1000, (1, 1), name='conv1000')(x)
+x = Conv2D(1000, (1, 1), name='conv1000')(x)
 
 # Softmax on last axis of tensor to normalize the class
 # predictions in each spatial area

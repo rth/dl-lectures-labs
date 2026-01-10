@@ -18,8 +18,8 @@ def classif_and_loc(num_classes):
     # model so as to preserve coarse grained 7 x 7 spatial information
     # from the last convolutional feature maps computed by the ResNet50
     # model.
-    localization_tower = Convolution2D(4, (1, 1), activation='relu',
-                                       name='hidden_conv')(model_input)
+    localization_tower = Conv2D(4, (1, 1), activation='relu',
+                                name='hidden_conv')(model_input)
     localization_tower = Flatten()(localization_tower)
     localization_tower = Dropout(0.2)(localization_tower)
     head_boxes = Dense(4, name="head_boxes")(localization_tower)

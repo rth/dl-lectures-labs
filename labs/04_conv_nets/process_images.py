@@ -1,16 +1,18 @@
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 from keras.applications.resnet50 import ResNet50
 from keras.models import Model
 from keras.preprocessing import image
 from keras.applications.imagenet_utils import preprocess_input
 import h5py
-from scipy.misc import imread, imresize
+from PIL import Image
 import numpy as np
-import os
 
 model = ResNet50(include_top=True, weights='imagenet')
 input = model.layers[0].input
 output = model.layers[-2].output
-base_model = Model(input, output)
+base_model = Model(inputs=input, outputs=output)
 del model
 
 
@@ -23,8 +25,8 @@ for idx in range(len(paths) // batch_size + 1):
     batch_end = min((idx+1) * batch_size, len(paths))
     imgs = []
     for path in paths[batch_bgn:batch_end]:
-        img = imread(path)
-        img = imresize(img, (224,224)).astype("float32")
+        img = np.array(Image.open(path))
+        img = np.array(Image.fromarray(img).resize((224, 224))).astype("float32")
         img = preprocess_input(img[np.newaxis])
         imgs.append(img)
     batch_tensor = np.vstack(imgs)

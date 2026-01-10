@@ -1,3 +1,6 @@
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 from keras.applications.resnet50 import ResNet50
 import numpy as np
 import h5py
