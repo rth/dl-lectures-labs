@@ -5,7 +5,7 @@ model.add(Dense(hidden_dim, input_dim=input_dim,
 model.add(Dense(hidden_dim, activation="relu"))
 model.add(Dense(output_dim, activation="softmax"))
 
-optimizer = optimizers.Adam(lr=0.001)
+optimizer = optimizers.Adam(learning_rate=0.001)
 model.compile(optimizer=optimizer, loss='categorical_crossentropy',
               metrics=['accuracy'])
 

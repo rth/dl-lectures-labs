@@ -1,3 +1,6 @@
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 from time import time
 import numpy as np
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
