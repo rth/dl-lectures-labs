@@ -1,5 +1,5 @@
-from tensorflow.keras.layers import Concatenate, Input
-from tensorflow.keras.models import Model
+from keras.layers import Concatenate, Input
+from keras.models import Model
 
 
 def inception_layer(tensor, n_filters):

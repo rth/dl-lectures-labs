@@ -1,7 +1,7 @@
 from skimage.io import imread
 from skimage.transform import resize
-from tensorflow.keras.applications.imagenet_utils import preprocess_input
-from tensorflow.keras.applications.imagenet_utils import decode_predictions
+from keras.applications.imagenet_utils import preprocess_input
+from keras.applications.imagenet_utils import decode_predictions
 
 path = "laptop.jpeg"
 
