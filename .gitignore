@@ -60,6 +60,8 @@ train-labels-idx1-ubyte.gz
 
 labs/06_deep_nlp/bbc-fulltext.zip
 labs/06_deep_nlp/bbc/
+labs/07_deep_nlp_2/bbc-fulltext.zip
+labs/07_deep_nlp_2/bbc/
 
 labs/09_triplet_loss/lfw-a.zip
 labs/09_triplet_loss/lfw-a/

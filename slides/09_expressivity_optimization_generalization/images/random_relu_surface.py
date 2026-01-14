@@ -1,3 +1,6 @@
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 import matplotlib.pyplot as plt
 import numpy as np
 from keras.layers import Dense

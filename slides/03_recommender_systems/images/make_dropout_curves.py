@@ -1,18 +1,20 @@
 # display figures in the notebook
-import tensorflow as tf
+import os
+os.environ["KERAS_BACKEND"] = "torch"
+
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import load_digits
-from sklearn.externals import joblib
+import joblib
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
-from keras.utils.np_utils import to_categorical
+from keras.utils import to_categorical
 
 
-m = joblib.Memory(cachedir='/tmp')
+m = joblib.Memory(location='/tmp')
 
 
 @m.cache()
@@ -42,7 +44,7 @@ def make_curves(random_state=42):
 
     curve_data = {}
     for dropout in [0, 0.2, 0.8]:
-        tf.set_random_seed(random_state)
+        np.random.seed(random_state)
         model = Sequential()
         model.add(Dense(H, input_dim=N, activation='relu'))
         model.add(Dropout(dropout))
@@ -53,9 +55,9 @@ def make_curves(random_state=42):
         model.add(Dense(K))
         model.add(Activation("softmax"))
 
-        model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy')
+        model.compile(optimizer=SGD(learning_rate=0.1), loss='categorical_crossentropy')
 
-        history = model.fit(X_train, Y_train, batch_size=128, nb_epoch=150,
+        history = model.fit(X_train, Y_train, batch_size=128, epochs=150,
                             validation_split=0.5, shuffle=True)
         curve_data[(dropout, 'train')] = history.history['loss']
         curve_data[(dropout, 'validation')] = history.history['val_loss']
