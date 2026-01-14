@@ -18,6 +18,3 @@ torchvision>=0.15.0
 
 # h5py - no longer pinned (Keras 3 prefers .keras format)
 h5py>=3.0.0
-
-# Monitoring
-tensorboard

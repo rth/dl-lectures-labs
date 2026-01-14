@@ -32,6 +32,10 @@ simple_seq2seq_checkpoint.h5
 .vscode
 .ipynb_checkpoints/
 
+# Claude Code
+CLAUDE.md
+.claude/
+
 # tf summary folders
 tensorflow_summaries
 
