@@ -4,7 +4,7 @@ os.environ["KERAS_BACKEND"] = "torch"
 from keras.layers import Conv2D
 from keras.models import Model
 
-input = base_model.layers[0].input
+input = base_model.input
 
 # Take the output of the last layer of the convnet
 # layer:

@@ -15,7 +15,7 @@ meta_clsloc_file = join(dirname(__file__), "data", "meta_clsloc.mat")
 
 synsets = loadmat(meta_clsloc_file)["synsets"][0]
 
-synsets_imagenet_sorted = sorted([(int(s[0]), str(s[1][0])) for s in synsets[:1000]],
+synsets_imagenet_sorted = sorted([(int(s[0].item()), str(s[1][0])) for s in synsets[:1000]],
                                  key=lambda v:v[1])
 
 corr = {}
@@ -32,7 +32,7 @@ def depthfirstsearch(id_, out=None):
     if isinstance(id_, int):
         pass
     else:
-        id_ = next(int(s[0]) for s in synsets if s[1][0] == id_)
+        id_ = next(int(s[0].item()) for s in synsets if s[1][0] == id_)
         
     out.append(id_)
     children = synsets[id_-1][5][0]

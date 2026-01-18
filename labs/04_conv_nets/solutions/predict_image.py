@@ -13,7 +13,7 @@ img = resize(img, (224, 224), mode='reflect', preserve_range=True,
 # add a dimension for a "batch" of 1 image
 img_batch = preprocess_input(img[np.newaxis]).astype("float32")
 
-predictions = model(img_batch).numpy()
+predictions = model(img_batch).detach().numpy()
 decoded_predictions= decode_predictions(predictions)
 
 for s, name, score in decoded_predictions[0]:
