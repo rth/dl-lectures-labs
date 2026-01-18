@@ -45,7 +45,7 @@ Course material by Charles Ollion - Olivier Grisel
 
 ## Arcanes of DL
 
-- Implement using `Numpy`, and `Tensorflow` (`Keras`)
+- Implement using `Numpy`, and `Keras 3` (with `PyTorch` backend)
 - Engineering knowledge for building and training DL
 
 ---
@@ -180,7 +180,7 @@ Course material by Charles Ollion - Olivier Grisel
 
 --
 
-Most of chatbots claiming "AI" do not use Deep Learning (yet?)
+Modern conversational AI (ChatGPT, Claude, Gemini) is powered by Large Language Models
 
 ---
 # DL Today: Vision + NLP
@@ -199,50 +199,111 @@ Most of chatbots claiming "AI" do not use Deep Learning (yet?)
 ---
 # DL Today: Generative models
 
+### Image Generation: From GANs to Diffusion Models
+
 .center[
-<img src="images/nvidia_celeb.jpg" style="width: 350px;" />
-<br/>Sampled celebrities [Nvidia 2017]
+<img src="images/nvidia_celeb.jpg" style="width: 300px;" />
+<br/><small>GAN-generated faces [Nvidia 2017]</small>
 ]
 
 --
-<br/>
 
-.center[
-<img src="images/stackgan.jpg" style="width: 600px;" />
-<br/>StackGAN v2 [Zhang 2017]
-]
-
+**Modern diffusion models** (2022+): Stable Diffusion, DALL-E 3, Midjourney
+- Higher quality, more controllable, text-to-image generation
+- Open source models enable widespread adoption
 
 ---
 # DL Today: Generative models
+
+### Audio & Video Generation
+
+**Text-to-Speech**: ElevenLabs, OpenAI TTS - near-human quality voice synthesis
+
+--
+
+**Music Generation**: Suno, Udio - full songs from text prompts
+
+--
+
+**Video Generation**: Sora, Runway, Pika
+- Text/image to video
+- Consistent motion and physics understanding
+
+---
+## Large Language Models (LLMs)
+
+### Foundation Models (2020+)
+- **GPT-4, Claude, Gemini, Llama 3**: Multi-billion parameter models
+- Trained on massive text corpora, then fine-tuned for dialogue
+
+--
+
+### Key Capabilities
+- Reasoning, problem-solving, code generation
+- Multimodal understanding (text + images)
+
+--
+
+### Scaling Laws
+- Performance improves predictably with model size and data
+
+---
+# Multimodal Models
+
+### Text + Image Understanding
+
 .center[
-<img src="images/WaveNet.gif" style="width: 400px;" />
-<br/>Sound generation with WaveNet [DeepMind 2017]
+<img src="images/dalle.png" style="width: 500px;" />
+<br/><small>DALL-E: Text-to-image generation</small>
 ]
 
 --
 
-<br/>
-
-Guess which one is generated?
-
-.center[
-
-<audio controls><source src="images/columbia_gen.wav"></audio> <br/>
-
-<audio controls><source src="images/columbia_gt.wav"></audio>
-
-<small>_Tacotron 2 Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram Predictions, 2017_</small>
-]
+**Modern vision-language models**: GPT-4V, Claude, Gemini
+- Native image understanding (not just generation)
+- Visual question answering, document analysis, diagram interpretation
 
 ---
-# Language / Image models
+# DL Today: AI Agents
 
-Open-AI GPT-3, or DALL-E: https://openai.com/blog/dall-e/
+### LLMs + Tools + Planning + Memory
 
-.center[
-<img src="images/dalle.png" style="width: 600px;" />
-]
+--
+
+**Tool use**: Web browsing, code execution, API calls, file operations
+
+--
+
+**Planning**: Breaking complex tasks into steps (chain-of-thought, ReAct)
+
+--
+
+**Memory**: Maintaining context across interactions
+
+--
+
+### Applications
+- Research assistants (literature review, data analysis)
+- Customer service automation
+- Personal productivity tools
+
+---
+# DL Today: Coding Agents
+
+### AI-assisted software development
+
+--
+
+**IDE assistants**: GitHub Copilot, Cursor, Windsurf
+- Code completion, chat, refactoring within the editor
+
+--
+
+**Coding agents**: Claude Code, OpenAI Codex, Gemini Code Assist
+- Autonomous multi-step task completion
+
+_Impact: Fundamentally changing how software is written and maintained_
+
 ---
 # DL in Science: Genomics
 
@@ -254,9 +315,13 @@ Open-AI GPT-3, or DALL-E: https://openai.com/blog/dall-e/
 --
 
 .center[
-<img src="images/protein_fold.gif" style="width: 320px;" /><br/>
-<small>[AlphaFold by DeepMind](https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology)</small>
+<img src="images/protein_fold.gif" style="width: 320px; margin-top: -30px;" /><br/>
+<small>[AlphaFold 2](https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology): Solved the 50-year protein folding problem (2020)</small>
 ]
+
+--
+
+**AlphaFold 3** (2024): Extends to protein-ligand and protein-DNA interactions
 
 ---
 
@@ -285,6 +350,10 @@ Open-AI GPT-3, or DALL-E: https://openai.com/blog/dall-e/
 --
 
 <small> AlphaGo/Zero: Monte Carlo Tree Search, Deep Reinforcement Learning, self-play </small>
+
+--
+
+<small> Also: OpenAI Five (Dota 2), AlphaStar (StarCraft II) - complex real-time strategy </small>
 
 ---
 # Outline of the class
