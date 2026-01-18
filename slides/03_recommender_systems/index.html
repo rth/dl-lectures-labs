@@ -138,8 +138,10 @@ $$embedding(\text{'salad'}) = [3.28, -0.45, ... 7.11] \in \mathbb{R}^d$$
 Size of vocabulary $n = |V|$, size of embedding $d$
 
 ```py
+from keras.layers import Embedding
+
 # input: batch of integers
-Embedding(output_dim=d, input_dim=n, input_length=1)
+Embedding(input_dim=n, output_dim=d, input_length=1)
 # output: batch of float vectors
 ```
 
@@ -356,12 +358,16 @@ overfitting is reduced but not completely solved.
 <br/>
 <br/>
 ```py
-model = Sequential()
-model.add(Dense(hidden_size, input_shape, activation='relu'))
-*model.add(Dropout(p=0.5))
-model.add(Dense(hidden_size, activation='relu'))
-*model.add(Dropout(p=0.5))
-model.add(Dense(output_size, activation='softmax'))
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+
+model = Sequential([
+    Dense(hidden_size, input_shape=input_shape, activation='relu'),
+*   Dropout(rate=0.5),
+    Dense(hidden_size, activation='relu'),
+*   Dropout(rate=0.5),
+    Dense(output_size, activation='softmax'),
+])
 ```
 
 ???

@@ -178,11 +178,12 @@ logistic regression is the same without the hidden layer
 
 ### Keras implementation
 ```py
-model = Sequential()
-model.add(Dense(H, input_dim=N))  # weight matrix dim [N * H]
-model.add(Activation("tanh"))
-model.add(Dense(K))               # weight matrix dim [H x K]
-model.add(Activation("softmax"))
+import keras
+
+model = keras.Sequential([
+    keras.layers.Dense(H, activation="tanh", input_dim=N),  # weight matrix dim [N * H]
+    keras.layers.Dense(K, activation="softmax"),            # weight matrix dim [H x K]
+])
 ```
 
 ---
@@ -577,7 +578,7 @@ in the joint objective function.
 
 --
   - or monitor validation loss and divide $\eta_{t}$ by 2 or 10 when no progress
-  - See [ReduceLROnPlateau](https://keras.io/callbacks/#reducelronplateau) in Keras
+  - See [ReduceLROnPlateau](https://keras.io/api/callbacks/reduce_lr_on_plateau/) in Keras
 
 ???
 Overview of recent research and empirical tricks:
