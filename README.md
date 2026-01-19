@@ -33,7 +33,7 @@ the [github repository](https://github.com/rth/dl-lectures-labs/):
 
     git clone https://github.com/rth/dl-lectures-labs
 
-These notebooks only work with `keras and tensorflow`
+These notebooks require Keras 3 with the PyTorch backend.
 Please follow the [installation\_instructions.md](
 https://github.com/rth/dl-lectures-labs/blob/master/installation_instructions.md)
 to get started.

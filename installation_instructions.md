@@ -1,79 +1,138 @@
 # Deep Learning class - installation instructions
 
+## Option 1: uv (recommended)
+
+[uv](https://docs.astral.sh/uv/) is a fast, modern Python package manager. Follow the
+[installation instructions](https://docs.astral.sh/uv/getting-started/installation/)
+for your platform.
+
+Then clone the repository and set up the environment:
+
+```bash
+git clone https://github.com/rth/dl-lectures-labs
+cd dl-lectures-labs
+uv venv --python 3.13
+
+# macOS/Linux
+source .venv/bin/activate
+
+# Windows (Command Prompt)
+.venv\Scripts\activate
+
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+uv pip install -r requirements.txt
+```
+
+## Option 2: conda/miniforge
+
 Download the miniforge3 distribution for your Operating System
 (Windows, macOS or Linux):
 
    https://github.com/conda-forge/miniforge#miniforge3
 
 miniforge is a conda installation that uses the packages from the conda-forge
-installation by default. We recommand using this instead of Anaconda/miniconda3
-because conda-forge tends to be more up-to-date and support more platforms than
-the default channel of Anaconda/miniconda. However both might work for this
-class.
+channel by default.
 
-Optional: make sure you have the latest version of conda which comes with faster solvers,
+Create a dedicated conda environment for this class:
 
-    conda update -n base conda
+```bash
+conda create -n dlclass python=3.13
+conda activate dlclass
+pip install -r requirements.txt
+```
 
-Recommended: it's strongly recommended to create a dedicated conda environment for this class
-if you don't want to mess with Python dependencies needed for other classes or projects:
+## Keras backend configuration
 
-    conda create -n dlclass -c conda-forge python=3.9
-    conda activate dlclass
+This course uses Keras 3 with the PyTorch backend. Set the backend before running
+any notebooks:
 
-You can install the requireds packages with conda:
+```bash
+# macOS/Linux
+export KERAS_BACKEND=torch
 
-    conda install -c conda-forge -y tensorflow scikit-learn pandas jupyterlab matplotlib-base h5py pillow scikit-image lxml pip ipykernel
+# Windows (Command Prompt)
+set KERAS_BACKEND=torch
 
-Check that you can import tensorflow with the python from anaconda:
+# Windows (PowerShell)
+$env:KERAS_BACKEND = "torch"
+```
 
-    python -c "import tensorflow as tf; print(tf.__version__)"
-    2.11.0
+To make this permanent:
+- **macOS/Linux**: Add the export line to your `~/.bashrc` or `~/.zshrc`
+- **Windows**: Set via System Properties → Environment Variables, or add to your PowerShell profile
 
-Note that any tensorflow version from 2.0.0, <3.0.0 should work for this class.
+## Verification
+
+Check that Keras 3 and PyTorch are installed correctly:
+
+```bash
+python -c "import keras; print(keras.__version__)"
+python -c "import torch; print(torch.__version__)"
+```
+
+Keras should show version 3.x and PyTorch should show version 2.x.
+
+## Jupyter kernel setup
 
 If you have several installations of Python on your system (virtualenv, conda
 environments...), it can be confusing to select the correct Python environment
-from the jupyter interface. You can name this environment for instance
-"dlclass" and reference it as a Jupyter kernel:
+from the Jupyter interface. You can register this environment as a Jupyter kernel:
 
-    python -m ipykernel install --user --name dlclass --display-name dlclass
+```bash
+python -m ipykernel install --user --name dlclass --display-name dlclass
+```
 
-Ideally: create a new jupyter notebook and check that you can import
-the numpy, matplotlib, tensorflow  modules.
+Then create a new Jupyter notebook and check that you can import
+numpy, matplotlib, keras, and torch modules.
+
+## Webcam support (optional)
 
 To take pictures with the webcam we will also need opencv-python:
 
-    python -m pip install opencv-python
+```bash
+pip install opencv-python
+```
 
 If your laptop does not have a webcam or if opencv does not work, don't worry
 this is not mandatory.
 
-
 # Troubleshooting
 
-In a console check the installation location of the conda command in
-your PATH:
+## Check your Python environment
 
-    conda info
+Verify which Python is being used:
 
-Read the output of that command to verify that your conda command is installed
-where you expect it to be. If it's not the case, you might want to change the
-order in your PATH variable (for instance in your $HOME/.bashrc or $HOME/.zshrc
-file on Linux and macOS) accordingly.
+```bash
+# macOS/Linux
+which python
 
-Check that the pip command in your PATH is the one installed by conda:
+# Windows
+where python
 
-    pip show pip
+# All platforms
+python --version
+```
 
-and check that it matches:
+For conda users, check the installation location:
 
-    python -m pip show pip
+```bash
+conda info
+```
 
-In particular, look at the "Location:" line of pip is a subfolder
-of the "environment root:" line from "conda info".
+Read the output to verify that your conda command is installed where you expect
+it to be. If it's not the case, you might need to adjust your PATH:
+- **macOS/Linux**: Edit `~/.bashrc` or `~/.zshrc` to change the PATH order
+- **Windows**: Modify PATH via System Properties → Environment Variables
 
-If you cannot solve your installations without the help of fellow students,
-please feel free to contact instructors (preferably in the slack channel of the
-class) with the outputs of the previous command and include the full error
-messages along with the name and version of your operating system.
+## Check pip location
+
+Check that the pip command in your PATH matches your Python environment:
+
+```bash
+pip show pip
+python -m pip show pip
+```
+
+The "Location:" line should be a subfolder of your environment root.
