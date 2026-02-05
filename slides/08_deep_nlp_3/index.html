@@ -37,7 +37,7 @@
       <textarea id="source">
 class: center, middle
 
-# Sequences, Attention and transformer
+# Sequences and Attention
 
 Charles Ollion - Olivier Grisel
 
@@ -141,24 +141,32 @@ Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. "Sequence to sequence learning w
 Encoder and decoder can **share weights** (but more common to have separate weights)
 
 ---
-## Large Vocabulary Size
+## Large Vocabulary Size: Sampled Softmax
 
-**Softmax** computation becomes **intractable** both at training and
-inference time (sum over $|V|$).
-
---
-
-**Negative Sampling** works well to learn word embeddings but is **not a
-good approximation** for **language modeling** and machine translation.
+**Softmax** computation is **O(|V|)** per prediction - intractable for 100k-1M words.
 
 --
 
-Approximate softmax with **sampled softmax** (a.k.a. bucketing):
+**Sampled softmax**: only compute $\exp()$ for $k$ sampled negatives + true class.
 
-  - Accumulate train sequences in buckets $i \in B$ with $|V_i| ~= 50k$;
-  - Sample bucket $i$ at random and train with regular softmax on $V_i$;
-  - Share softmax parameters for words in common across buckets;
-  - Iterate untill the end of the training set.
+.center[
+<img src="images/sampled_softmax.svg" style="width: 580px;" />
+]
+
+Works well for learning embeddings, but **biased estimate** for language modeling.
+
+---
+## Vocabulary Bucketing
+
+Partition vocabulary into **buckets** by frequency.
+
+.center[
+<img src="images/bucketing.svg" style="width: 580px;" />
+]
+
+- Group sentences so target words in a mini-batch fall in the same bucket
+- Full softmax over bucket (~50k words) instead of full vocabulary
+- Share parameters for words appearing in multiple buckets
 
 ???
 Sampled softmax (https://arxiv.org/abs/1412.2007):
